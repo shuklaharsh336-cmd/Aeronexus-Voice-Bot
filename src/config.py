@@ -4,6 +4,10 @@ from functools import lru_cache
 class Settings(BaseSettings):
     host: str = "0.0.0.0"
     port: int = 8000
+
+    vonage_api_key: str | None = None
+    vonage_api_secret: str | None = None
+    gemini_api_key: str | None = None
     
     vonage_application_id: str = ""
     vonage_private_key_path: str = ""
