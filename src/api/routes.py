@@ -18,6 +18,9 @@ async def health_check():
 @router.post("/call", response_model=CallResponse, responses={500: {"model": ErrorResponse}})
 async def make_call(request: CallRequest, vonage_service: VonageService = Depends(get_vonage_service)):
     try:
+        logger.info(f"Incoming call request payload: to_number='{request.to_number}'")
+        print(f"\n[DEBUG] Call triggered. Target Number: {request.to_number}\n")
+        
         data = await vonage_service.create_outbound_call(request.to_number)
         return CallResponse(message="Call initiated successfully", call_id=data.get("uuid", ""))
     except Exception as e:
